@@ -4,6 +4,7 @@
        xmlns:local="clr-namespace:BookPlayer.Views"
        xmlns:fonticon="clr-namespace:BookPlayer.Views.Fonts"        
        Title="BookPlayer"
+       FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource BaseBackgroundLight}, Dark={StaticResource BaseBackgroundDark}}"
        x:Class="BookPlayer.AppShell">
 
     <!--
@@ -71,7 +72,7 @@
         </ResourceDictionary>
     </Shell.Resources>
     <Shell.FlyoutHeader>
-        <Grid HeightRequest="200" BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundLight}, Dark={StaticResource BackgroundDark}}">
+        <Grid HeightRequest="200" BackgroundColor="{AppThemeBinding Light={StaticResource BaseBackgroundLight}, Dark={StaticResource BaseBackgroundDark}}">
             <Label Text="BookPlayer"
                    TextColor="{AppThemeBinding Light={DynamicResource OnSurfaceLight}, Dark={DynamicResource OnSurfaceDark}}"
                    FontSize="48"
