@@ -1,7 +1,7 @@
 # BookPlayer
 Quickly made audio book player mobile app for Android. It uses [BaseFlow/XamarinMediaManager](https://github.com/Baseflow/XamarinMediaManager) under the hood and has simple UI for the playing files and showing library content. 
 
-I have no plans to develop this further, but maybe this can be useful draft project for someone to see how XamarinMediaManager can be easily used.
+I have no plans to develop this further, but maybe this can be a useful draft project for someone to see how XamarinMediaManager can be easily used.
 
 ## Features
 - Made with .NET (Visual Studio, Xamarin.Forms)
