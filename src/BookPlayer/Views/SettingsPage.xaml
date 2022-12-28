@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:BookPlayer.Converters"
+             x:Class="BookPlayer.Views.SettingsPage"
+             Title="{Binding Title}"             
+             BackgroundColor="{AppThemeBinding Light={StaticResource BaseBackgroundLight}, Dark={StaticResource BaseBackgroundDark}}">
+    <ContentPage.Resources>
+        <converters:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter"/>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid Padding="4" ColumnDefinitions="*,auto" RowDefinitions="auto">            
+            <StackLayout 
+                Orientation="Vertical" 
+                VerticalOptions="Center"
+                Margin="8,8,0,0"
+                Grid.Column="0"
+                Grid.Row="0">
+                <Label Text="Book library path" Style="{StaticResource LabelSmallStyle}"/>
+                <Entry Text="{Binding BookLibraryPath}"/>
+            </StackLayout>
+            <Button 
+                Grid.Column="1"
+                Grid.Row="0"
+                Margin="0,16,0,16"
+                BackgroundColor="{StaticResource Primary}"
+                TextColor="{StaticResource OnSurfaceDark}"
+                Text="Apply" 
+                Command="{Binding UpdateBookLibraryPathCommand}"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

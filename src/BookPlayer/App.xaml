@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BookPlayer.App">
+    <!--
+        Define global resources and styles here, that apply to all pages in your app.
+    -->
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Primary">#2196F3</Color>
+            <Color x:Key="BackgroundDark">#111111</Color>            
+            <Color x:Key="PrimaryDark">#101010</Color>
+            <Color x:Key="OnPrimaryDark">#7ed5ea</Color>
+            <Color x:Key="SurfaceDark">#202020</Color>
+            <Color x:Key="OnSurfaceDark">#eeeeee</Color>
+            <Color x:Key="OnSurfaceSubtleDark">#cccccc</Color>
+            <Color x:Key="OnSurfaceDimmedDark">#aaaaaa</Color>
+            <Color x:Key="BaseBackgroundDark">#000000</Color>            
+
+            <!-- Light theme-->
+            <Color x:Key="BackgroundLight">#0863bce5</Color>            
+            <Color x:Key="PrimaryLight">#fdfdfd</Color>
+            <Color x:Key="OnPrimaryLight">#28559a</Color>            
+            <Color x:Key="SurfaceLight">#ffffff</Color>
+            <Color x:Key="OnSurfaceLight">#222222</Color>
+            <Color x:Key="OnSurfaceSubtleLight">#666666</Color>
+            <Color x:Key="OnSurfaceDimmedLight">#777777</Color>
+            <Color x:Key="BaseBackgroundLight">#FFFFFF</Color>            
+            
+            <ResourceDictionary>
+                <OnPlatform x:TypeArguments="x:String" x:Key="Material">
+                    <On Platform="Android" Value="MaterialIcons-Regular.ttf#Material Design Icons" />
+                    <On Platform="iOS" Value="MaterialIcons-Regular" />
+                </OnPlatform>
+            </ResourceDictionary>
+
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource OnSurfaceLight}, Dark={StaticResource OnSurfaceDark}}"/>
+                <Setter Property="FontSize" Value="Medium"/>
+            </Style>
+
+            <Style x:Key="LabelSmallStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource OnSurfaceLight}, Dark={StaticResource OnSurfaceDark}}"/>
+                <Setter Property="FontSize" Value="Small"/>
+            </Style>
+            <Style x:Key="LabelSmallSubtle" TargetType="Label" BasedOn="{StaticResource LabelSmallStyle}">
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource OnSurfaceDimmedLight}, Dark={StaticResource OnSurfaceDimmedDark}}"/>
+            </Style>
+
+            <Style x:Key="LabelLargeStyle" TargetType="Label" >
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource OnSurfaceLight}, Dark={StaticResource OnSurfaceDark}}"/>
+                <Setter Property="FontSize" Value="Large"/>
+            </Style>
+            
+            <Style TargetType="Button">                
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Pressed">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource BackgroundLight}, Dark={StaticResource BackgroundDark}}" />
+                                    <Setter Property="Scale" Value="1.2" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource BackgroundLight}, Dark={StaticResource BackgroundDark}}" />
+                                    <Setter Property="Scale" Value="1.0" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+            
+        </ResourceDictionary>        
+    </Application.Resources>
+</Application>

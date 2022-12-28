@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BookPlayer.Views.PlayerPage"
+             Title="{Binding Title}"
+             xmlns:converters="clr-namespace:BookPlayer.Converters"
+             xmlns:fonticon="clr-namespace:BookPlayer.Views.Fonts"             
+             BackgroundColor="{AppThemeBinding Light={StaticResource BaseBackgroundLight}, Dark={StaticResource BaseBackgroundDark}}"
+             x:Name="PlayerPagePage">
+
+    <ContentPage.ToolbarItems>
+        <!--<ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />-->
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <converters:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter"/>
+        <ResourceDictionary>
+            <Style x:Key="PlayerButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource BackgroundLight}, Dark={StaticResource BackgroundDark}}"/>
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource OnSurfaceSubtleLight}, Dark={StaticResource OnSurfaceSubtleDark}}"/>
+                <Setter Property="Margin" Value="12,0,12,0"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+                <Setter Property="FontFamily" Value="{StaticResource Material}"/>
+                <Setter Property="FontSize" Value="30"/>
+                <Setter Property="WidthRequest" Value="60"/>
+                <Setter Property="BorderWidth" Value="0"/>
+            </Style>
+            <Style x:Key="PlayerButtonBigStyle" TargetType="Button" BasedOn="{StaticResource PlayerButtonStyle}">
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource OnSurfaceLight}, Dark={StaticResource OnSurfaceDark}}"/>
+                <Setter Property="FontSize" Value="90"/>
+                <Setter Property="WidthRequest" Value="110"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid         
+        RowDefinitions="50*,50*"
+        BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundLight}, Dark={StaticResource BackgroundDark}}">
+        <Grid 
+            Grid.Row="0"             
+            Padding="32,0,32,0">
+            <Image>
+                <Image.Source>
+                    <FileImageSource File="{Binding Player.BookCoverPath}" />
+                </Image.Source>
+            </Image>
+        </Grid>
+        <Grid
+            RowDefinitions="*,auto"            
+            Padding="0,16,0,0"
+            Grid.Row="1">
+            <Grid
+                Grid.Row="0"
+                RowDefinitions="auto,auto,auto,*">
+                <Label 
+                    Grid.Row="0"
+                    HorizontalOptions="Center"
+                    Margin="0,0,0,4"
+                    Text="{Binding Player.CurrentTitle}" Style="{StaticResource LabelStyle}"/>
+                <Label 
+                    Grid.Row="1"
+                    HorizontalOptions="Center"
+                    Margin="0,0,0,8"
+                    Text="{Binding Player.CurrentSubtitle}" Style="{StaticResource LabelStyle}"/>
+                
+                <Button 
+                    Grid.Row="2"
+                    Style="{StaticResource PlayerButtonBigStyle}"                     
+                    Command="{Binding PlayCommand}">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button" Binding="{Binding Player.IsPlaying}" Value="true">
+                            <Setter Property="Text" Value="{x:Static fonticon:FontIcon.MaterialPauseCircle}"/>
+                        </DataTrigger>
+                        <DataTrigger TargetType="Button" Binding="{Binding Player.IsPlaying}" Value="false">
+                            <Setter Property="Text" Value="{x:Static fonticon:FontIcon.MaterialPlayCircle}"/>
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+                
+                <StackLayout         
+                    Grid.Row="3"
+                    Margin="0,16,0,0"
+                    HorizontalOptions="Center"                
+                    Orientation="Horizontal">
+                    <Button 
+                    Style="{StaticResource PlayerButtonStyle}" 
+                    Text="{x:Static fonticon:FontIcon.MaterialPrevious}"
+                    Command="{Binding PreviousCommand}"/>
+                    <Button 
+                    Style="{StaticResource PlayerButtonStyle}" 
+                    Text="{x:Static fonticon:FontIcon.MaterialRewind}" Margin="8,0,56,0"
+                    Command="{Binding JumpBackwardCommand}"/>
+                    <Button 
+                    Style="{StaticResource PlayerButtonStyle}" 
+                    Text="{x:Static fonticon:FontIcon.MaterialForward}"
+                    Command="{Binding JumpForwardCommand}"/>
+                    <Button 
+                    Style="{StaticResource PlayerButtonStyle}" 
+                    Text="{x:Static fonticon:FontIcon.MaterialSkip}"
+                    Command="{Binding NextCommand}"/>
+                </StackLayout>
+            </Grid>
+            <StackLayout
+                Orientation="Vertical"
+                Grid.Row="1"
+                Margin="0,0,0,16">
+                <Slider
+                    Margin="0,24,0,0"                    
+                    Value="{Binding Player.CurrentProgress}"
+                    MaximumTrackColor="{AppThemeBinding Light={StaticResource OnSurfaceLight}, Dark={StaticResource OnSurfaceDark}}"
+                    MinimumTrackColor="{AppThemeBinding Light={StaticResource OnSurfaceLight}, Dark={StaticResource OnSurfaceDark}}"
+                    ThumbColor="{AppThemeBinding Light={StaticResource OnSurfaceLight}, Dark={StaticResource OnSurfaceDark}}"
+                    DragCompletedCommand="{Binding ChangePositionCommand}"
+                />
+                <Grid                 
+                ColumnDefinitions="*,*"
+                HorizontalOptions="StartAndExpand"
+                Margin="16,0,16,0">
+                    <Label 
+                    Grid.Column="0"
+                    Text="{Binding Player.Elapsed, Converter={StaticResource TimeSpanToStringConverter}}" 
+                    Style="{StaticResource LabelSmallStyle}"/>
+                    <Label 
+                    Grid.Column="1"                    
+                    HorizontalTextAlignment="End"
+                    Text="{Binding Player.Duration, Converter={StaticResource TimeSpanToStringConverter}}" 
+                    Style="{StaticResource LabelSmallStyle}"/>
+                </Grid>
+            </StackLayout>            
+        </Grid>                   
+    </Grid>
+</ContentPage>

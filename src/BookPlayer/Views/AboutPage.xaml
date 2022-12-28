@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BookPlayer.Views.AboutPage"
+             xmlns:vm="clr-namespace:BookPlayer.ViewModels"
+             Title="{Binding Title}"
+             BackgroundColor="{AppThemeBinding Light={StaticResource BaseBackgroundLight}, Dark={StaticResource BaseBackgroundDark}}">
+    
+    <ContentPage.BindingContext>
+        <vm:AboutViewModel />
+    </ContentPage.BindingContext>    
+    <Grid
+        RowDefinitions="auto"
+        ColumnDefinitions="auto,auto"
+        Padding="12">
+        <Label             
+            Style="{StaticResource LabelLargeStyle}"
+            Text="BookPlayer"/>
+        <Label             
+            Grid.Column="1"
+            Style="{StaticResource LabelLargeStyle}"
+            Text="{Binding Version}"/>
+    </Grid>
+</ContentPage>
