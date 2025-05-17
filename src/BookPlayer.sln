@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookPlayer.iOS", "BookPlaye
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookPlayer", "BookPlayer\BookPlayer.csproj", "{F61A2F4F-8CF0-4084-A086-1100112469B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookPlayer.UWP", "BookPlayer.UWP\BookPlayer.UWP.csproj", "{63D893DE-AB4D-469F-94F9-45EACC934ECE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,24 @@ Global
 		{F61A2F4F-8CF0-4084-A086-1100112469B3}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{F61A2F4F-8CF0-4084-A086-1100112469B3}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{F61A2F4F-8CF0-4084-A086-1100112469B3}.Release|iPhoneSimulator.Deploy.0 = Release|Any CPU
+		{63D893DE-AB4D-469F-94F9-45EACC934ECE}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{63D893DE-AB4D-469F-94F9-45EACC934ECE}.Debug|Any CPU.Build.0 = Debug|x64
+		{63D893DE-AB4D-469F-94F9-45EACC934ECE}.Debug|Any CPU.Deploy.0 = Debug|x64
+		{63D893DE-AB4D-469F-94F9-45EACC934ECE}.Debug|iPhone.ActiveCfg = Debug|x64
+		{63D893DE-AB4D-469F-94F9-45EACC934ECE}.Debug|iPhone.Build.0 = Debug|x64
+		{63D893DE-AB4D-469F-94F9-45EACC934ECE}.Debug|iPhone.Deploy.0 = Debug|x64
+		{63D893DE-AB4D-469F-94F9-45EACC934ECE}.Debug|iPhoneSimulator.ActiveCfg = Debug|x64
+		{63D893DE-AB4D-469F-94F9-45EACC934ECE}.Debug|iPhoneSimulator.Build.0 = Debug|x64
+		{63D893DE-AB4D-469F-94F9-45EACC934ECE}.Debug|iPhoneSimulator.Deploy.0 = Debug|x64
+		{63D893DE-AB4D-469F-94F9-45EACC934ECE}.Release|Any CPU.ActiveCfg = Release|x64
+		{63D893DE-AB4D-469F-94F9-45EACC934ECE}.Release|Any CPU.Build.0 = Release|x64
+		{63D893DE-AB4D-469F-94F9-45EACC934ECE}.Release|Any CPU.Deploy.0 = Release|x64
+		{63D893DE-AB4D-469F-94F9-45EACC934ECE}.Release|iPhone.ActiveCfg = Release|x64
+		{63D893DE-AB4D-469F-94F9-45EACC934ECE}.Release|iPhone.Build.0 = Release|x64
+		{63D893DE-AB4D-469F-94F9-45EACC934ECE}.Release|iPhone.Deploy.0 = Release|x64
+		{63D893DE-AB4D-469F-94F9-45EACC934ECE}.Release|iPhoneSimulator.ActiveCfg = Release|x64
+		{63D893DE-AB4D-469F-94F9-45EACC934ECE}.Release|iPhoneSimulator.Build.0 = Release|x64
+		{63D893DE-AB4D-469F-94F9-45EACC934ECE}.Release|iPhoneSimulator.Deploy.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
