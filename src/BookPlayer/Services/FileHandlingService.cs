@@ -11,7 +11,8 @@ namespace BookPlayer.Services
 {
     public class FileHandlingService : IFileHandlingService
     {
-        private readonly Dictionary<string, BookMetadata> _metadataCache = new Dictionary<string, BookMetadata>();
+        private readonly Dictionary<string, BookMetadata> _metadataCache 
+            = new Dictionary<string, BookMetadata>();
 
         public IList<Book> GetBooks(string rootFolderPath)
         {

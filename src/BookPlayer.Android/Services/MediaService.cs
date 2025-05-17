@@ -12,7 +12,6 @@ namespace BookPlayer.Droid.Services
     {
         public void AddMetaData(IMediaItem mediaItem, string mediaArtist)
         {
-            // For samsung phones
             Bundle bundle = new Bundle();            
             bundle.PutString(MediaMetadataCompat.MetadataKeyArtist, mediaArtist);
             mediaItem.Extras = bundle;

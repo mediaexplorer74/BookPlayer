@@ -9,9 +9,23 @@ namespace BookPlayer.Droid.Services
     public class FileService : IFileService
     {
 #pragma warning disable CS0618
-        public string StorageFolderPath => Android.OS.Environment.GetExternalStoragePublicDirectory("Audiobooks").AbsolutePath;
+        public string StorageFolderPath
+        {
+            get
+            {
+                // construct platform-specific path
+                return Android.OS.Environment.GetExternalStoragePublicDirectory(
+                    "Audiobooks").AbsolutePath;
+            }
+        }
 #pragma warning restore CS0618
-        
-        public string AppDataPath => FileSystem.AppDataDirectory;
+
+        public string AppDataPath
+        {
+            get
+            {
+                return FileSystem.AppDataDirectory;
+            }
+        }
     }
 }

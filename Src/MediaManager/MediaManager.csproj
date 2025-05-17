@@ -1,0 +1,128 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <Platforms>AnyCPU;x64;x86</Platforms>
+    <LangVersion>latest</LangVersion>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.19041.0</SupportedOSPlatformVersion>
+    <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.19041.0</TargetPlatformMinVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+    <SingleProject>true</SingleProject>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' And $([MSBuild]::IsOSPlatform('windows'))">
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
+    <DisableEmbeddedXbf>false</DisableEmbeddedXbf>
+    <EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
+  </PropertyGroup>
+
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' And $([MSBuild]::IsOSPlatform('windows'))">
+    <Compile Include="Platforms\Uap\**\*.cs" />
+    <!--<Page Include="Platforms\Uap\**\*.xaml" SubType="Designer" Generator="MSBuild:Compile" />-->
+    <None Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
+    <Compile Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.221209.1" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Include="CollectionExtensions.cs" />
+    <Compile Include="CrossMediaManager.cs" />
+    <Compile Include="MediaManagerBase.cs" />
+    <Compile Include="MediaManagerExtensions.cs" />
+    <Compile Include="NotifyPropertyChangedBase.cs" />
+    <Compile Include="Volume\VolumeChangedEventHandler.cs" />
+    <Compile Include="Volume\IVolumeManager.cs" />
+    <Compile Include="Volume\VolumeChangedEventArgs.cs" />
+    <Compile Include="Volume\VolumeManagerBase.cs" />
+    <Compile Include="Video\IVideoView.cs" />
+    <Compile Include="Video\VideoAspectMode.cs" />
+    <Compile Include="Queue\QueueEndedEventHandler.cs" />
+    <Compile Include="Queue\QueueChangedEventHandler.cs" />
+    <Compile Include="Queue\IMediaQueue.cs" />
+    <Compile Include="Queue\MediaQueue.cs" />
+    <Compile Include="Queue\QueueChangedEventArgs.cs" />
+    <Compile Include="Queue\QueueEndedEventArgs.cs" />
+    <Compile Include="Queue\ShuffleMode.cs" />
+    <Compile Include="Player\BeforePlayingEventHandler.cs" />
+    <Compile Include="Player\AfterPlayingEventHandler.cs" />
+    <Compile Include="Player\MediaPlayerBase.cs" />
+    <Compile Include="Player\MediaPlayerEventArgs.cs" />
+    <Compile Include="Player\MediaPlayerState.cs" />
+    <Compile Include="Playback\BufferedChangedEventArgs.cs" />
+    <Compile Include="Playback\StateChangedEventHandler.cs" />
+    <Compile Include="Playback\BufferedChangedEventHandler.cs" />
+    <Compile Include="Playback\PositionChangedEventHandler.cs" />
+    <Compile Include="Playback\MediaItemFinishedEventHandler.cs" />
+    <Compile Include="Playback\MediaItemChangedEventHandler.cs" />
+    <Compile Include="Playback\MediaItemFailedEventHandler.cs" />
+    <Compile Include="Playback\IPlaybackManager.cs" />
+    <Compile Include="Playback\PositionChangedEventArgs.cs" />
+    <Compile Include="Playback\RepeatMode.cs" />
+    <Compile Include="Playback\StateChangedEventArgs.cs" />
+    <Compile Include="Notifications\INotificationManager.cs" />
+    <Compile Include="Notifications\NotificationManagerBase.cs" />
+    <Compile Include="Media\IAlbumProvider.cs" />
+    <Compile Include="Media\IArtistProvider.cs" />
+    <Compile Include="Media\IMediaExtractor.cs" />
+    <Compile Include="Media\IMediaExtractorProvider.cs" />
+    <Compile Include="Media\IMediaItemImageProvider.cs" />
+    <Compile Include="Media\IMediaItemMetadataProvider.cs" />
+    <Compile Include="Media\IMediaItemProvider.cs" />
+    <Compile Include="Media\IMediaItemVideoFrameProvider.cs" />
+    <Compile Include="Media\IMediaLibrary.cs" />
+    <Compile Include="Media\IPlaylistProvider.cs" />
+    <Compile Include="Media\IRadioProvider.cs" />
+    <Compile Include="Media\LibraryProvider.cs" />
+    <Compile Include="Media\MediaExtractorBase.cs" />
+    <Compile Include="Media\MediaExtractorExtensions.cs" />
+    <Compile Include="Media\MediaExtractorProviderBase.cs" />
+    <Compile Include="Media\MediaItemEventArgs.cs" />
+    <Compile Include="Media\MediaItemFailedEventArgs.cs" />
+    <Compile Include="Media\MediaLibrary.cs" />
+    <Compile Include="Media\MetadataChangedEventArgs.cs" />
+    <Compile Include="Media\Providers\ApeTagProvider.cs" />
+    <Compile Include="Media\Providers\NfoMetadataProvider.cs" />
+    <Compile Include="Media\Providers\VorbisCommentProvider.cs" />
+    <Compile Include="Media\Providers\XmlMetadataProvider.cs" />
+    <Compile Include="Library\Album.cs" />
+    <Compile Include="Library\Artist.cs" />
+    <Compile Include="Library\ContentItem.cs" />
+    <Compile Include="Library\DownloadStatus.cs" />
+    <Compile Include="Library\IAlbum.cs" />
+    <Compile Include="Library\IArtist.cs" />
+    <Compile Include="Library\IContentItem.cs" />
+    <Compile Include="Library\MetadataUpdatedEventHandler.cs" />
+    <Compile Include="Library\IMediaItem.cs" />
+    <Compile Include="Library\IPlaylist.cs" />
+    <Compile Include="Library\IRadio.cs" />
+    <Compile Include="Library\MediaItem.cs" />
+    <Compile Include="Library\MediaItemExtensions.cs" />
+    <Compile Include="Library\MediaLocation.cs" />
+    <Compile Include="Library\MediaType.cs" />
+    <Compile Include="Library\Playlist.cs" />
+    <Compile Include="Library\Radio.cs" />
+    <Compile Include="Library\SharingType.cs" />
+    <Compile Include="IMediaManager`1.cs" />
+    <Compile Include="IMediaManager.cs" />
+    <Compile Include="Player\IMediaPlayer`2.cs" />
+    <Compile Include="Player\IMediaPlayer`1.cs" />
+    <Compile Include="Player\IMediaPlayer.cs" />
+    <Compile Include="Media\ILibraryProvider.cs" />
+    <Compile Include="Media\ILibraryProvider`1.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1821" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.4" />
+  </ItemGroup>
+  
+  <!--Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" /-->
+</Project>

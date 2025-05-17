@@ -16,12 +16,14 @@ I have no plans to develop this further, but maybe this can be a useful draft pr
 - Currently supports and parses only books with its metadata in [SMIL](https://en.wikipedia.org/wiki/Synchronized_Multimedia_Integration_Language) format. All files (.html, .mp3 and .smil) related to a specific book needs to be in one folder.
 
 ## Screenshots
-![](img/Player.png)
-![](img/Bookshelf.png)
+![](Images/Player.png)
+![](Images/Bookshelf.png)
 
 ## My 2 cents
 - UWP "workload" added only (no solution tuning)
-- Discovered that Net standard 2.1. used… needed to switch on 1.4 or 2.0...
+- "Common library" switched from standard 2.1 to 2.0.
+- Xamarin Forms downgraded from 5.0 to 4.8.
+
 
 ## License
 Licensed under the MIT license.
