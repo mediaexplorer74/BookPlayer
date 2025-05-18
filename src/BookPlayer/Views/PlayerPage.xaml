@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BookPlayer.Views.PlayerPage"
              Title="{Binding Title}"
-             xmlns:converters="clr-namespace:BookPlayer.Converters"
-             xmlns:fonticon="clr-namespace:BookPlayer.Views.Fonts"             
+             xmlns:converters="clr-namespace:BookPlayer.Converters"                   
              BackgroundColor="{AppThemeBinding Light={StaticResource BaseBackgroundLight}, Dark={StaticResource BaseBackgroundDark}}"
              x:Name="PlayerPagePage">
+    <!--xmlns:fonticon="clr-namespace:BookPlayer.Views.Fonts"     -->
 
-    <ContentPage.ToolbarItems>
+        <ContentPage.ToolbarItems>
         <!--<ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />-->
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
@@ -67,10 +67,12 @@
                     Command="{Binding PlayCommand}">
                     <Button.Triggers>
                         <DataTrigger TargetType="Button" Binding="{Binding Player.IsPlaying}" Value="true">
-                            <Setter Property="Text" Value="{x:Static fonticon:FontIcon.MaterialPauseCircle}"/>
+                            <!--{x:Static fonticon:FontIcon.MaterialPauseCircle}-->
+                                <Setter Property="Text" Value=" || "/>
                         </DataTrigger>
                         <DataTrigger TargetType="Button" Binding="{Binding Player.IsPlaying}" Value="false">
-                            <Setter Property="Text" Value="{x:Static fonticon:FontIcon.MaterialPlayCircle}"/>
+                            <!--{x:Static fonticon:FontIcon.MaterialPlayCircle}-->
+                                <Setter Property="Text" Value=" > "/>
                         </DataTrigger>
                     </Button.Triggers>
                 </Button>
@@ -82,19 +84,19 @@
                     Orientation="Horizontal">
                     <Button 
                     Style="{StaticResource PlayerButtonStyle}" 
-                    Text="{x:Static fonticon:FontIcon.MaterialPrevious}"
+                    Text=" &lt;- "
                     Command="{Binding PreviousCommand}"/>
                     <Button 
                     Style="{StaticResource PlayerButtonStyle}" 
-                    Text="{x:Static fonticon:FontIcon.MaterialRewind}" Margin="8,0,56,0"
+                    Text=" &lt;&lt; " Margin="8,0,56,0"
                     Command="{Binding JumpBackwardCommand}"/>
                     <Button 
                     Style="{StaticResource PlayerButtonStyle}" 
-                    Text="{x:Static fonticon:FontIcon.MaterialForward}"
+                    Text=" >> "
                     Command="{Binding JumpForwardCommand}"/>
                     <Button 
                     Style="{StaticResource PlayerButtonStyle}" 
-                    Text="{x:Static fonticon:FontIcon.MaterialSkip}"
+                    Text=" ->"
                     Command="{Binding NextCommand}"/>
                 </StackLayout>
             </Grid>

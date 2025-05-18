@@ -9,24 +9,24 @@ namespace BookPlayer.UWP.Services
 {
     public class MediaService : IMediaService
     {
-        public void AddMetaData(IMediaItem mediaItem, string mediaArtist)
+        public void AddMetaData(MediaManager.Media.IMediaItem mediaItem, string mediaArtist)
         {
             Bundle bundle = new Bundle();            
-            bundle.PutString(MediaMetadataCompat.MetadataKeyArtist, mediaArtist);
+            //bundle.PutString(MediaMetadataCompat.MetadataKeyArtist, mediaArtist);
             mediaItem.Extras = bundle;
         }
     }
 
-    internal class MediaMetadataCompat
+    public class MediaMetadataCompat
     {
-        internal static object MetadataKeyArtist;
+        public static object MetadataKeyArtist;
     }
 
-    internal class Bundle
+    public class Bundle
     {
-        internal void PutString(object metadataKeyArtist, string mediaArtist)
-        {
+        //internal void PutString(object metadataKeyArtist, string mediaArtist)
+        //{
             // Not Implemented
-        }
+        //}
     }
 }

@@ -7,6 +7,6 @@ namespace BookPlayer.Interfaces
     /// </summary>
     public interface IMediaService
     {
-        void AddMetaData(IMediaItem mediaItem, string mediaArtist);
+        //void AddMetaData(IMediaItem mediaItem, string mediaArtist);
     }
 }

@@ -24,7 +24,7 @@ namespace BookPlayer.Services
             var books = new List<Book>();
             var directoryPaths = Directory.GetDirectories(rootFolderPath);
 
-            foreach (var directoryPath in directoryPaths)
+            foreach (string directoryPath in directoryPaths)
             {
                 // get book's metadata
                 BookMetadata bookMetaData = GetBookMainMetadata(directoryPath);
@@ -34,15 +34,18 @@ namespace BookPlayer.Services
                         .FirstOrDefault(s => s.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) ||
                         s.EndsWith(".png", StringComparison.OrdinalIgnoreCase));
 
+                // form book name
+                string bookName = directoryPath.Split(Path.DirectorySeparatorChar).LastOrDefault();
+
                 // form the book object
                 Book book = new Book
                 {
                     CoverPath = coverPath == null ? default : coverPath,
                     Path = directoryPath,
-                    Name = bookMetaData == null? "Name" : bookMetaData.Title,
+                    Name = bookMetaData == null? bookName : bookMetaData.Title,
                     TotalTime = bookMetaData == null ? new TimeSpan(0,5,0) : bookMetaData.TotalTime,
-                    Narrator = bookMetaData == null ? "Name" : bookMetaData.Narrator,
-                    Author = bookMetaData == null ? "Name" : bookMetaData.Author
+                    Narrator = bookMetaData == null ? "Narrator" : bookMetaData.Narrator,
+                    Author = bookMetaData == null ? "Author" : bookMetaData.Author
                 };
 
                 books.Add(book);
@@ -58,7 +61,7 @@ namespace BookPlayer.Services
                 return _metadataCache[filePath];
             }
 
-            var smilFilePath = filePath.Replace(".mp3", ".smil");
+            string smilFilePath = filePath.Replace(".mp3", ".smil");
 
             if (!File.Exists(smilFilePath))
             {

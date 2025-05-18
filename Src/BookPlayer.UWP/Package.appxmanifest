@@ -62,6 +62,7 @@
     <uap:Capability Name="picturesLibrary"/>
     <uap3:Capability Name="userNotificationListener"/>
     <uap:Capability Name="videosLibrary"/>
+    <uap:Capability Name="removableStorage"/>
     <DeviceCapability Name="bluetooth"/>
   </Capabilities>
 </Package>
