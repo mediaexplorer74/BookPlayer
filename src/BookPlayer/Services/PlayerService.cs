@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
+using TagLib.Flac;
 using Xamarin.Forms;
 
 namespace BookPlayer.Services
@@ -71,6 +72,9 @@ namespace BookPlayer.Services
                     _timer.Start();
                 }
             }
+
+            //Experimental
+            UpdateDisplayInfo();
         }
 
         private void Current_PositionChanged(object sender,
@@ -104,15 +108,22 @@ namespace BookPlayer.Services
             }
 
             _currentBook = book;
-            _currentBook.Files = Directory.GetFiles(_currentBook.Path, "*.mp3")
-                .OrderBy(file => file).ToList();
+            
+            //_currentBook.Files = Directory.GetFiles(_currentBook.Path, "*.mp3")
+            //    .OrderBy(file => file).ToList();
+            _currentBook.Files = Directory.EnumerateFiles(_currentBook.Path, "*.mp3",
+                SearchOption.AllDirectories).OrderBy(file => file).ToList();
+
+
             BookCoverPath = book.CoverPath;
 
             CrossMediaManager.Current.MediaQueue.Clear();
-            var metadata = _fileHandlingService.GetBookMetadata(
-                Path.Combine(_currentBook.Path, _currentBook.CurrentFile ?? _currentBook.Files.First()));
-            UpdateMetadata(metadata);
+            //var metadata = _fileHandlingService.GetBookMetadata(
+            //    Path.Combine(_currentBook.Path, _currentBook.CurrentFile ?? _currentBook.Files.First()));
+            //UpdateMetadata(metadata);
             IsBookOpen = true;
+
+            UpdateDisplayInfo();
         }
 
         public async Task PlayOrPause()
@@ -158,7 +169,7 @@ namespace BookPlayer.Services
             {                
                 await CrossMediaManager.Current.PlayPause();
             }
-        }
+        }//
 
         //private void MediaPlayer_AfterPlaying(object sender, MediaManager.Player.MediaPlayerEventArgs e)
         //{
@@ -172,11 +183,15 @@ namespace BookPlayer.Services
         public async Task PlayPreviousFile()
         {
             await CrossMediaManager.Current.PlayPrevious();
+
+            UpdateDisplayInfo();
         }
 
         public async Task PlayNextFile()
         {
             await CrossMediaManager.Current.PlayNext();
+
+            UpdateDisplayInfo();
         }
 
         public bool IsPlaying
@@ -311,6 +326,26 @@ namespace BookPlayer.Services
             }
         }
 
+
+        private void UpdateDisplayInfo()
+        {
+            if (_currentBook != null)
+            {
+                CurrentTitle = _currentBook.Name;
+
+                CurrentSubtitle = _currentBook.CurrentFile + " (" + _currentBook.Files.Count + ")";
+
+                if (CrossMediaManager.Current.MediaQueue.Current != null)
+                {
+                    CrossMediaManager.Current.MediaQueue.Current.DisplayTitle =
+                        _currentBook.Name;
+                    CrossMediaManager.Current.MediaQueue.Current.DisplaySubtitle
+                        = _currentBook.CurrentFile;
+
+                }
+            }
+        }
+
         private void UpdateMetadata(BookMetadata metaData)
         {
             if (metaData != null)
@@ -318,34 +353,36 @@ namespace BookPlayer.Services
                 CurrentTitle = metaData.Title;
                 CurrentSubtitle = metaData.SubTitle;
                 
-                //if (CrossMediaManager.Current.Queue.Current != null)
-                //{
-                //    CrossMediaManager.Current.Queue.Current.DisplayTitle = metaData.Title;
-                //    CrossMediaManager.Current.Queue.Current.DisplaySubtitle = metaData.SubTitle;
-                //    DependencyService.Get<IMediaService>().AddMetaData(CrossMediaManager.Current.Queue.Current, metaData.SubTitle);
-                //}
+                if (CrossMediaManager.Current.MediaQueue.Current != null)
+                {
+                    CrossMediaManager.Current.MediaQueue.Current.DisplayTitle = metaData.Title;
+                    CrossMediaManager.Current.MediaQueue.Current.DisplaySubtitle = metaData.SubTitle;
+                    DependencyService.Get<IMediaService>().AddMetaData(
+                        CrossMediaManager.Current.MediaQueue.Current, metaData.SubTitle);
+                }
                 
                 Duration = metaData.Duration;
                 CurrentProgress = _currentBook.CurrentProgress.TotalSeconds / metaData.Duration.TotalSeconds;
                 _currentBook.TotalElapsedTime = metaData.TotalElapsedTime + _currentBook.CurrentProgress;
                 TotalProgress = (double)_currentBook.TotalElapsedTime.Seconds / _currentBook.TotalTime.TotalSeconds;
                 Elapsed = _currentBook.CurrentProgress;
-            }
+            }            
         }
 
         private void UpdateProgress()
         {            
-            //if (CrossMediaManager.Current.Queue.Current != null)
-            //{
-            //    _currentBook.CurrentProgress = CrossMediaManager.Current.Position;
-            //    _currentBook.CurrentFile = Path.GetFileName(CrossMediaManager.Current.Queue.Current.MediaUri);
-            //             
-            //    // Do not update progress if it is zero. It indicates that player is stopped
-            //    if (_currentBook.CurrentProgress.TotalMilliseconds != 0)
-            //    {
-            //        _bookService.UpdateProgress(_currentBook);
-            //    }                
-            //}            
+            if (CrossMediaManager.Current.MediaQueue.Current != null)
+            {
+                _currentBook.CurrentProgress = CrossMediaManager.Current.Position;
+                _currentBook.CurrentFile = Path.GetFileName(
+                    CrossMediaManager.Current.MediaQueue.Current.MediaUri);
+                         
+               // Do not update progress if it is zero. It indicates that player is stopped
+                if (_currentBook.CurrentProgress.TotalMilliseconds != 0)
+                {
+                    _bookService.UpdateProgress(_currentBook);
+                }                
+            }            
         }
 
         public async Task JumpBack()

@@ -1,8 +1,10 @@
-﻿using BookPlayer.UWP.Services;
-using BookPlayer.Interfaces;
+﻿using BookPlayer.Interfaces;
+using BookPlayer.UWP.Services;
+using System;
+using System.Threading.Tasks;
+using Windows.Storage;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Windows.Storage;
 
 [assembly: Dependency(typeof(FileService))]
 namespace BookPlayer.UWP.Services
@@ -15,8 +17,9 @@ namespace BookPlayer.UWP.Services
             get
             {
                 // construct platform-specific path
-                StorageFolder AppDataFolder = KnownFolders.MusicLibrary;
-                return AppDataFolder.Path + "\\Audiobooks";
+                //StorageFolder AppDataFolder = KnownFolders.MusicLibrary;
+                var musicPath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
+                return /*AppDataFolder.Path*/musicPath + "\\Audiobooks";
             }
         }
 #pragma warning restore CS0618
@@ -28,5 +31,6 @@ namespace BookPlayer.UWP.Services
                 return FileSystem.AppDataDirectory;
             }
         }
+       
     }
 }

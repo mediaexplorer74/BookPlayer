@@ -12,7 +12,7 @@ namespace BookPlayer.UWP.Services
         public void AddMetaData(MediaManager.Media.IMediaItem mediaItem, string mediaArtist)
         {
             Bundle bundle = new Bundle();            
-            //bundle.PutString(MediaMetadataCompat.MetadataKeyArtist, mediaArtist);
+            bundle.PutString(MediaMetadataCompat.MetadataKeyArtist, mediaArtist);
             mediaItem.Extras = bundle;
         }
     }
@@ -24,9 +24,9 @@ namespace BookPlayer.UWP.Services
 
     public class Bundle
     {
-        //internal void PutString(object metadataKeyArtist, string mediaArtist)
-        //{
+        internal void PutString(object metadataKeyArtist, string mediaArtist)
+        {
             // Not Implemented
-        //}
+        }
     }
 }

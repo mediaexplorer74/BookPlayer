@@ -55,9 +55,12 @@ namespace BookPlayer.ViewModels
                 Books.Clear();
                 var books = _bookService.GetBooks();
 
-                foreach (var book in books)
+                if (books != null)
                 {
-                    Books.Add(book);
+                    foreach (var book in books)
+                    {
+                        Books.Add(book);
+                    }
                 }
             }
             finally

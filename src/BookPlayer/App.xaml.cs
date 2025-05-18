@@ -11,6 +11,7 @@ namespace BookPlayer
 {
     public partial class App : Application
     {
+        public static string booksPath = "";
 
         public App()
         {

@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
+using TagLib;
+using TagLib.Id3v2;
 
 namespace BookPlayer.Services
 {
@@ -27,15 +29,25 @@ namespace BookPlayer.Services
             foreach (string directoryPath in directoryPaths)
             {
                 // get book's metadata
-                BookMetadata bookMetaData = GetBookMainMetadata(directoryPath);
+                //BookMetadata bookMetaData = GetBookMainMetadata(directoryPath);
+                MusicFileInfo bookMetaData = default;
+
+                try
+                {
+                    bookMetaData = AnalyzeMusicFile(directoryPath);
+                }
+                catch { }
 
                 // get coverPath
-                string coverPath = Directory.EnumerateFiles(directoryPath, "*.*", SearchOption.AllDirectories)
+                string coverPath = Directory.EnumerateFiles(
+                    directoryPath, "*.*", SearchOption.AllDirectories)
                         .FirstOrDefault(s => s.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) ||
                         s.EndsWith(".png", StringComparison.OrdinalIgnoreCase));
 
                 // form book name
                 string bookName = directoryPath.Split(Path.DirectorySeparatorChar).LastOrDefault();
+
+               
 
                 // form the book object
                 Book book = new Book
@@ -44,7 +56,7 @@ namespace BookPlayer.Services
                     Path = directoryPath,
                     Name = bookMetaData == null? bookName : bookMetaData.Title,
                     TotalTime = bookMetaData == null ? new TimeSpan(0,5,0) : bookMetaData.TotalTime,
-                    Narrator = bookMetaData == null ? "Narrator" : bookMetaData.Narrator,
+                    Narrator = "Narrator",//bookMetaData == null ? "Narrator" : bookMetaData.Narrator,
                     Author = bookMetaData == null ? "Author" : bookMetaData.Author
                 };
 
@@ -53,6 +65,29 @@ namespace BookPlayer.Services
 
             return books;
         }
+
+
+        private MusicFileInfo AnalyzeMusicFile(string folderPath)
+        {
+            foreach (string filePath in Directory.EnumerateFiles(folderPath, "*.mp3",
+                SearchOption.AllDirectories))
+            {
+                using (var file = TagLib.File.Create(filePath))
+                {
+                    return new MusicFileInfo
+                    {
+                        FilePath = filePath,
+                        Title = file.Tag.Title ?? Path.GetFileNameWithoutExtension(filePath),
+                        TotalTime = file.Properties.Duration,
+                        Author = file.Tag.FirstPerformer ?? "Unknown",
+                        Narrator = "Narrator"
+                    };
+                }
+            }
+            return default;
+        }
+
+        
 
         public BookMetadata GetBookMetadata(string filePath)
         {
@@ -63,7 +98,7 @@ namespace BookPlayer.Services
 
             string smilFilePath = filePath.Replace(".mp3", ".smil");
 
-            if (!File.Exists(smilFilePath))
+            if (!System.IO.File.Exists(smilFilePath))
             {
                 return null;
             }
@@ -119,7 +154,7 @@ namespace BookPlayer.Services
         public BookMetadata GetBookMainMetadata(string directoryPath)
         {
             var nccFilePath = Path.Combine(directoryPath, "ncc.html");
-            if (!File.Exists(nccFilePath))
+            if (!System.IO.File.Exists(nccFilePath))
             {
                 return null;
             }
@@ -172,5 +207,17 @@ namespace BookPlayer.Services
 
             return metadata;
         }
+
+
+
+    }//class end
+
+    public class MusicFileInfo
+    {
+        public string FilePath { get; set; }
+        public string Title { get; set; }
+        public TimeSpan TotalTime { get; set; }
+        public string Author { get; set; }
+        public string Narrator { get; set; }
     }
 }

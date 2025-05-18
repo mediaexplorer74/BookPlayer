@@ -28,25 +28,33 @@ namespace BookPlayer.Services
 
         public IList<Book> GetBooks()
         {
-            var scannedBooks = _fileHandlingService.GetBooks(_optionService.BookLibraryRootFolderPath);
-            var existingBooks = _dataService.GetItems<Book>().ToList();
+            IList<Book> scannedBooks = _fileHandlingService.GetBooks(
+                _optionService.BookLibraryRootFolderPath);
 
-            foreach (var newBook in scannedBooks
-                .Where(book => !existingBooks.Any(existingBook => existingBook.Name.Equals(book.Name))))
+            List<Book> existingBooks = 
+                _dataService.GetItems<Book>().ToList();
+
+            if (scannedBooks != null)
             {
-                _dataService.UpdateItem(newBook);
+                foreach (var newBook in scannedBooks
+                    .Where(book => !existingBooks.Any(
+                        existingBook => existingBook.Name.Equals(book.Name))))
+                {
+                    _dataService.UpdateItem(newBook);
+                }
+
+                foreach (var oldBook in existingBooks
+                    .Where(book => !scannedBooks.Any(newBook => newBook.Name.Equals(book.Name))))
+                {
+                    _dataService.DeleteItem<Book>(oldBook.Id);
+                }
+
+                existingBooks = _dataService.GetItems<Book>().ToList();
+
+                return existingBooks.ToList();
             }
-
-            foreach (var oldBook in existingBooks
-                .Where(book => !scannedBooks.Any(newBook => newBook.Name.Equals(book.Name))))
-            {
-                _dataService.DeleteItem<Book>(oldBook.Id);
-            }
-
-            existingBooks = _dataService.GetItems<Book>().ToList();
-
-            return existingBooks.ToList();
-        }
+            return default;
+        }//GetBooks
 
         public Book GetSelectedBook()
         {            

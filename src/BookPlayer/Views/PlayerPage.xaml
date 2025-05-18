@@ -113,7 +113,7 @@
                     DragCompletedCommand="{Binding ChangePositionCommand}"
                 />
                 <Grid                 
-                ColumnDefinitions="*,*"
+                ColumnDefinitions="*,*,*"
                 HorizontalOptions="StartAndExpand"
                 Margin="16,0,16,0">
                     <Label 
@@ -122,9 +122,14 @@
                     Style="{StaticResource LabelSmallStyle}"/>
                     <Label 
                     Grid.Column="1"                    
-                    HorizontalTextAlignment="End"
-                    Text="{Binding Player.Duration, Converter={StaticResource TimeSpanToStringConverter}}" 
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding Player.Name}" 
                     Style="{StaticResource LabelSmallStyle}"/>
+                    <Label 
+                     Grid.Column="2"                    
+                     HorizontalTextAlignment="End"
+                     Text="{Binding Player.Duration, Converter={StaticResource TimeSpanToStringConverter}}" 
+                     Style="{StaticResource LabelSmallStyle}"/> 
                 </Grid>
             </StackLayout>            
         </Grid>                   

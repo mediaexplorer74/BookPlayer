@@ -1,9 +1,10 @@
 ﻿
 namespace BookPlayer.Interfaces
 {
+    // 2 Interface declaration
     public interface IFileService
     {
-        string StorageFolderPath { get; }
-        string AppDataPath { get; }
+        public string StorageFolderPath { get; }
+        public string AppDataPath { get; }
     }
 }
