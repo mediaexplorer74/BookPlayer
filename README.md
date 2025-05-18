@@ -23,7 +23,7 @@ I have no plans to develop this further, but maybe this can be a useful draft pr
 ## My "2 cents"
 - UWP "workload" added only (no solution tuning)
 - Xamarin Forms downgraded from 5.0 to 4.8.
-- I Fixed issue "if no book metadata then exception" ... but I not realized file data reading (author, total time...)
+- I Fixed issue "if no book metadata then exception" ... but I not realized file attributes ("properties") reading (author, total time...)
 - If only mp3 file without .jpg, it may be dandegour (exception?)
 
 ## Errors / Bugs
