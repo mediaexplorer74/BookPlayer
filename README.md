@@ -1,4 +1,5 @@
 # BookPlayer
+![](Images/logo.png)
 
 My fork of BookPlayer project for micro-RnD (XamarinMediaManager Windows compatibility questions, etc.)
 
@@ -16,14 +17,20 @@ I have no plans to develop this further, but maybe this can be a useful draft pr
 - Currently supports and parses only books with its metadata in [SMIL](https://en.wikipedia.org/wiki/Synchronized_Multimedia_Integration_Language) format. All files (.html, .mp3 and .smil) related to a specific book needs to be in one folder.
 
 ## Screenshots
-![](Images/Player.png)
 ![](Images/Bookshelf.png)
+![](Images/Player.png)
 
-## My 2 cents
+## My "2 cents"
 - UWP "workload" added only (no solution tuning)
-- "Common library" switched from standard 2.1 to 2.0.
 - Xamarin Forms downgraded from 5.0 to 4.8.
+- I Fixed issue "if no book metadata then exception" 
 
+## Errors / Bugs
+- No "Player" user controls… so strange
+
+## TODO
+- Try to downgrade Xamarin Forms version
+- Try to add MediaManager.Forms repo...
 
 ## License
 Licensed under the MIT license.
@@ -31,6 +38,7 @@ Licensed under the MIT license.
 ## References
 - https://github.com/ilpork/BookPlayer oroginal BookPlayer project ( for Android, and iOS ? ) 
 - https://github.com/ilpork ilpork, cool c# developer
+- https://www.loyalbooks.com/ Free Public Domain Audiobooks Downloads (I got only Odyssey - homer for mediaplayer testing..)
 
 ## ..
 As is. No support. RnD only.

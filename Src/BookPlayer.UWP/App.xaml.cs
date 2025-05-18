@@ -52,11 +52,10 @@ namespace BookPlayer.UWP
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
-                //TEST
-                CrossMediaManager.Current.Init();
-
-
+                Xamarin.Forms.Forms.SetFlags("Shell_UWP_Experimental");
                 Xamarin.Forms.Forms.Init(e);
+                CrossMediaManager.Current.Init(); 
+
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {

@@ -26,17 +26,23 @@ namespace BookPlayer.Services
 
             foreach (var directoryPath in directoryPaths)
             {
-                var bookMetaData = GetBookMainMetadata(directoryPath);
-                var book = new Book
-                {
-                    CoverPath = Directory.EnumerateFiles(directoryPath, "*.*", SearchOption.AllDirectories)
+                // get book's metadata
+                BookMetadata bookMetaData = GetBookMainMetadata(directoryPath);
+
+                // get coverPath
+                string coverPath = Directory.EnumerateFiles(directoryPath, "*.*", SearchOption.AllDirectories)
                         .FirstOrDefault(s => s.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) ||
-                        s.EndsWith(".png", StringComparison.OrdinalIgnoreCase)),
+                        s.EndsWith(".png", StringComparison.OrdinalIgnoreCase));
+
+                // form the book object
+                Book book = new Book
+                {
+                    CoverPath = coverPath == null ? default : coverPath,
                     Path = directoryPath,
-                    Name = bookMetaData.Title,
-                    TotalTime = bookMetaData.TotalTime,
-                    Narrator = bookMetaData.Narrator,
-                    Author = bookMetaData.Author
+                    Name = bookMetaData == null? "Name" : bookMetaData.Title,
+                    TotalTime = bookMetaData == null ? new TimeSpan(0,5,0) : bookMetaData.TotalTime,
+                    Narrator = bookMetaData == null ? "Name" : bookMetaData.Narrator,
+                    Author = bookMetaData == null ? "Name" : bookMetaData.Author
                 };
 
                 books.Add(book);

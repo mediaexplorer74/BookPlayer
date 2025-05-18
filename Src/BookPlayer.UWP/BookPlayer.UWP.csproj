@@ -12,7 +12,7 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.19041.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -171,7 +171,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.14" />
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.8" />
     <PackageReference Include="Xamarin.Forms" Version="4.8.0.1821" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.4" />
   </ItemGroup>
@@ -182,14 +182,6 @@
     <ProjectReference Include="..\BookPlayer\BookPlayer.csproj">
       <Project>{f61a2f4f-8cf0-4084-a086-1100112469b3}</Project>
       <Name>BookPlayer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MediaManager.Forms\MediaManager.Forms.csproj">
-      <Project>{e59cddb7-eea4-4c65-ad9f-be24115cb2c9}</Project>
-      <Name>MediaManager.Forms</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MediaManager\MediaManager.csproj">
-      <Project>{fe336af6-36a6-4610-af02-01f1c2467c66}</Project>
-      <Name>MediaManager</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

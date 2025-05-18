@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
-    <Platforms>AnyCPU;x64;x86</Platforms>
+    <Platforms>AnyCPU;ARM;x64;x86</Platforms>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
@@ -14,11 +14,7 @@
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
     <PackageReference Include="Xamarin.Forms" Version="4.8.0.1821" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.7.4" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\MediaManager.Forms\MediaManager.Forms.csproj" />
-    <ProjectReference Include="..\MediaManager\MediaManager.csproj" />
+    <PackageReference Include="Plugin.MediaManager" Version="1.0.8" />
   </ItemGroup>
 
   <ItemGroup>
